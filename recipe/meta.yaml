@@ -1,5 +1,5 @@
 {% set name = "click-loglevel" %}
-{% set version = "0.6.1" %}
+{% set version = "0.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_') }}-{{ version }}.tar.gz
-  sha256: 9591fc4bee04b4eb9bde151f9bc756b970f5242161b3eab493af977d4b00bd46
+  sha256: a0a623fbe35d87f65ae266f8ab27dcc7e7de1015c0b2bdca45c57f3ef01f61f5
 
 build:
   noarch: python
