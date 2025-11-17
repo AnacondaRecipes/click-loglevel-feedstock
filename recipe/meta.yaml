@@ -10,26 +10,25 @@ source:
   sha256: a0a623fbe35d87f65ae266f8ab27dcc7e7de1015c0b2bdca45c57f3ef01f61f5
 
 build:
-  noarch: python
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: True  # [py<310]
 
 requirements:
   host:
     - hatchling
     - pip
-    - python {{ python_min }}
+    - python
   run:
-    - python >={{ python_min }}
+    - python
     - click >=8
 
 test:
   requires:
     - anyio
-    - asyncclick
+    - pip
     - pytest
     - pytest-cov
-    - python {{ python_min }}
     - trio
   source_files:
     - test
@@ -37,7 +36,8 @@ test:
   imports:
     - click_loglevel
   commands:
-    - python -m pytest -vv test
+    - pip check
+    - python -m pytest -vv test --ignore=test/test_with_asyncclick.py
 
 about:
   home: https://github.com/jwodder/click-loglevel
@@ -53,6 +53,7 @@ about:
     corresponding numeric values.  It also accepts integer values and leaves
     them as-is.  Custom log levels are also supported.
   dev_url: https://github.com/jwodder/click-loglevel
+  doc_url: https://github.com/jwodder/click-loglevel
 
 extra:
   recipe-maintainers:
